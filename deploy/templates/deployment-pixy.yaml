@@ -1,0 +1,41 @@
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ .Values.pixy.name }}
+data:
+{{ (.Files.Glob "files/kafka-pixy.yaml").AsConfig | indent 2 }}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.pixy.name }}
+  labels:
+    app: {{ .Values.pixy.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.pixy.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.pixy.name }}
+    spec:
+      containers:
+      - name: {{ .Values.pixy.name }}
+        image: pixy-jdr:latest
+        imagePullPolicy: Never
+        command: ["/usr/bin/kafka-pixy"]
+        args: ["-config", "{{ .Values.pixy.configDir }}/kafka-pixy.yaml", 
+        "-kafkaPeers", "{{ .Values.kafka.service.clusterIP }}:{{ .Values.kafka.service.port }}",
+        "-zookeeperPeers", "{{ .Values.zk.service.clusterIP }}:{{ .Values.zk.service.port }}"]
+        volumeMounts:
+        - name: {{ .Values.pixy.name }}
+          mountPath: {{ .Values.pixy.configDir }}
+          readOnly: true
+      volumes:
+        - name: {{ .Values.pixy.name }}
+          configMap:
+            name: {{ .Values.pixy.name }}

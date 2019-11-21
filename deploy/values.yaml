@@ -1,0 +1,15 @@
+kafka:
+  name: kafka
+  service:
+    port: 9092
+    clusterIP: 10.96.1.1
+
+zk:
+  name: zookeeper
+  service:
+    port: 2181
+    clusterIP: 10.96.1.1
+
+pixy:
+  name: pixy
+  configDir: /etc/config
