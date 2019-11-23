@@ -22,14 +22,14 @@ func main() {
 	client := pb.NewKafkaPixyClient(conn)
 
 	request := &pb.ProdRq{
-		Topic: topicName,
+		Topic:    topicName,
 		KeyValue: []byte("test_key"),
-		Message: []byte("test_msg"),
+		Message:  []byte("test_msg"),
 	}
 	resp, err := client.Produce(context.TODO(), request)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	
-	log.Printf("produced msg success: partition=%s, offset=%s", resp.Partition, resp.Offset)
+
+	log.Printf("produced msg success: partition=%d, offset=%d", resp.Partition, resp.Offset)
 }
