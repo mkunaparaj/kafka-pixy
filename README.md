@@ -1,5 +1,12 @@
 # kafka-pixy-POC
 
+## Startup order
+
+1. Zookeeper
+2. Kafka
+3. Pixy
+4. UI
+
 ## TODO
 
 * separate kafka and zk
