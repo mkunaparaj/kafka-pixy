@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.ui.name }}
+  labels:
+    app: {{ .Values.ui.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.ui.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.ui.name }}
+    spec:
+      containers:
+      - name: {{ .Values.ui.name }}
+        image: solsson/kafka-manager:latest
+        env:
+        - name: ZK_HOSTS
+          value: "{{ .Values.zk.service.clusterIP }}:{{ .Values.zk.service.port }}"

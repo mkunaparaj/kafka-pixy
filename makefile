@@ -3,7 +3,7 @@ HELM_DEPLOY_NAME=events
 
 .PHONY: clean deploy
 
-deploy:
+run:
 	helm install $(HELM_DEPLOY_NAME) deploy
 
 clean:

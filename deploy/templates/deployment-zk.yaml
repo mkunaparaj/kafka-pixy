@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.zk.name }}
+  labels:
+    app: {{ .Values.zk.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.zk.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.zk.name }}
+    spec:
+      containers:
+      - name: {{ .Values.zk.name }}
+        image: zookeeper:latest

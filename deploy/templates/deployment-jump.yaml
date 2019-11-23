@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.jump.name }}
+  labels:
+    app: {{ .Values.jump.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.jump.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.jump.name }}
+    spec:
+      containers:
+      - name: {{ .Values.jump.name }}
+        image: kafka-jump:latest
+        imagePullPolicy: Never

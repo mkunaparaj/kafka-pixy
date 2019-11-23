@@ -24,9 +24,9 @@ const (
 
 func main() {
 
-	//if err := produce(topicName, 10000); err != nil {
-	//	log.Fatalf("produce error: %s", err.Error())
-	//}
+	if err := produce(topicName, 10); err != nil {
+		log.Fatalf("produce error: %s", err.Error())
+	}
 
 	if err := consume(topicName, groupName); err != nil {
 		log.Fatalf("consume error: %s", err.Error())

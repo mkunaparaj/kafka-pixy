@@ -147,7 +147,7 @@ proxies:
 
       # Consume request will wait at most this long until for a message from a
       # topic to become available before expiring.
-      long_polling_timeout: 3s
+      long_polling_timeout: 30s
 
       # The maximum number of unacknowledged messages allowed for a particular
       # group-topic-partition at a time. When this number is reached subsequent
