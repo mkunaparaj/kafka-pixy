@@ -128,7 +128,7 @@ proxies:
 
       # Period of time that Kafka-Pixy should wait for an acknowledgement
       # before retrying.
-      ack_timeout: 5m
+      ack_timeout: 1m
 
       # Size of all buffered channels created by the consumer module.
       channel_buffer_size: 64

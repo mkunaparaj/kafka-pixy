@@ -1,32 +1,38 @@
 package main
 
 import (
+	"context"
 	"log"
-	"time"
-
+	pb "sandbox/kafka-pixy/clients/grpc"
 	"sandbox/kafka-pixy/clients/grpc/client"
 )
 
 const (
 	addr     string = "localhost:19091"
 	topic    string = "main_topic"
-	interval int    = 5 // in seconds
+	group    string = "consumer_group_5"
+	cluster  string = "default"
+	interval int    = 1 // in seconds
 )
 
 func main() {
 
 	c := client.New(addr)
 
-	t := time.Tick(time.Duration(interval) * time.Second)
+	for {
 
-	for _ = range t {
+		input := &pb.ProdRq{
+			Cluster:  cluster,
+			Topic:    topic,
+			KeyValue: []byte("test_key"),
+			Message:  []byte("test_msg"),
+		}
 
-		resp, err := c.Produce(topic, []byte("test_key"), []byte("test_msg"))
+		rs, err := c.Produce(context.TODO(), input)
 		if err != nil {
 			log.Fatalln(err)
 		}
 
-		log.Printf("produced msg success: partition=%d, offset=%d", resp.Partition, resp.Offset)
-
+		log.Printf("produced msg: partition=%d offset=%d", rs.GetPartition(), rs.GetOffset())
 	}
 }

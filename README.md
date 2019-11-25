@@ -9,12 +9,13 @@
 
 ## TODO
 
-* separate kafka and zk
 * form kafka cluster not just single node
 * topic with multiple paritions then use consumer group on it
-* HTTP/2
 * retries on LeaderNotAvailable errors
 * Kafka consistency patterns
+* own grpc protocol
+* multiple kafka clusters
+* seem to be losing messages in between start up and down
 
 ## Curls
 
@@ -28,6 +29,9 @@ curl 'http://localhost:19092/topics/topic2/messages?group=1'
 run from jump
 
 ```bash
+kubectl get pods | grep jump
+kubectl exec -it jumpbox bash
+
 kafkacat -b 10.96.1.1:9092 -L
 kafkacat -b 10.96.1.1:9092 -t topic1 -P
 ```

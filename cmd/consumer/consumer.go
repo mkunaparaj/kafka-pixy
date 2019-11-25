@@ -1,31 +1,49 @@
 package main
 
 import (
+	"context"
 	"log"
+	pb "sandbox/kafka-pixy/clients/grpc"
 	"sandbox/kafka-pixy/clients/grpc/client"
-	"time"
 )
 
 const (
-	addr     string = "localhost:19091"
-	topic    string = "main_topic"
-	group    string = "consumer_group_1"
-	interval int    = 2 // in seconds
+	addr    string = "localhost:19091"
+	topic   string = "main_topic"
+	group   string = "5"
+	cluster string = "default"
 )
 
 func main() {
 
 	c := client.New(addr)
 
-	t := time.Tick(time.Duration(interval) * time.Second)
+	for {
 
-	for _ = range t {
+		cons := &pb.ConsNAckRq{
+			Cluster: cluster,
+			Topic:   topic,
+			Group:   group,
+		}
 
-		resp, err := c.Consume(topic, group)
+		consRs, err := c.ConsumeNAck(context.TODO(), cons)
 		if err != nil {
 			log.Fatalln(err)
 		}
 
-		log.Printf("consumed msg success: key=%s partition=%d, offset=%d", resp.GetKeyValue(), resp.GetPartition(), resp.GetOffset())
+		ack := &pb.AckRq{
+			Cluster:   cluster,
+			Topic:     topic,
+			Group:     group,
+			Partition: consRs.GetPartition(),
+			Offset:    consRs.GetOffset(),
+		}
+
+		_, err = c.Ack(context.TODO(), ack)
+		if err != nil {
+			log.Fatalln(err)
+		}
+
+		log.Printf("consumed msg: partition=%d offset=%d", consRs.GetPartition(), consRs.GetOffset())
 	}
 }
