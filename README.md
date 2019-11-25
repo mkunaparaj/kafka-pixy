@@ -6,6 +6,7 @@ expects helm + kubernetes running locally
 
 ```bash
 make run
+make ui # creates cluster pointed to zookeepers deployed in `make run`
 make clean # to destroy everything
 ```
 
@@ -44,3 +45,4 @@ multiple consumers on same partition
 proxy dies, maintains consumer group offset state on return
 set limits on unacknowledged requests
 the proxy will batch messages and then async pass to kafka to increase speed
+need a way to gracefully stop consumers to not leave a message half processed
