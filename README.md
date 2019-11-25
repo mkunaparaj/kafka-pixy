@@ -1,21 +1,23 @@
 # kafka-pixy-POC
 
-## Startup order
+## Usage
 
-1. Zookeeper
-2. Kafka
-3. Pixy
-4. UI
+expects helm + kubernetes running locally
+
+```bash
+make run
+make clean # to destroy everything
+```
 
 ## TODO
 
 * form kafka cluster not just single node
 * topic with multiple paritions then use consumer group on it
 * retries on LeaderNotAvailable errors
-* Kafka consistency patterns
-* own grpc protocol
 * multiple kafka clusters
 * seem to be losing messages in between start up and down
+* leverage context for goroutine management
+* partition scheme
 
 ## Curls
 
@@ -35,3 +37,10 @@ kubectl exec -it jumpbox bash
 kafkacat -b 10.96.1.1:9092 -L
 kafkacat -b 10.96.1.1:9092 -t topic1 -P
 ```
+
+## Observations
+
+multiple consumers on same partition
+proxy dies, maintains consumer group offset state on return
+set limits on unacknowledged requests
+the proxy will batch messages and then async pass to kafka to increase speed
