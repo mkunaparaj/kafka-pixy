@@ -11,7 +11,7 @@ import (
 const (
 	addr     string = "localhost:19091"
 	topic    string = "main_topic"
-	group    string = "3"
+	group    string = "4"
 	cluster  string = "default"
 	interval int    = 1 // in seconds
 )
@@ -28,6 +28,7 @@ func main() {
 			Topic:    topic,
 			KeyValue: []byte(fmt.Sprintf("test_key_%d", count)),
 			Message:  []byte("test_msg"),
+			//KeyUndefined: true,
 		}
 
 		rs, err := c.Produce(context.TODO(), input)

@@ -1,7 +1,11 @@
 SHELL := /bin/bash
 HELM_DEPLOY_NAME=events
-KAFKA_CLUSTER_NAME=default # corresponds to pixy config
-ZK_HOSTS=10.96.1.2:2181 # corresponds to kubernetes deployment ip
+
+# match with kafka-pixy config
+KAFKA_CLUSTER_NAME=default
+
+# match with kube zk service clusterIP
+ZK_HOSTS=10.96.1.2:2181
 
 .PHONY: clean ui run
 

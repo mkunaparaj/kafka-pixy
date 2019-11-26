@@ -17,12 +17,23 @@ make clean # to destroy everything
 * multiple kafka clusters
 * leverage context for goroutine management
 * partition scheme
+* buffered consumer channels
+* JMX polling
 
 ## Curls
 
 ```bash
-curl localhost:19092/topics
-curl 'http://localhost:19092/topics/topic2/messages?group=1'
+# get all topics
+curl 'http://localhost:19092/topics' | jq .
+
+# get all topics and their partitions
+curl 'http://localhost:19092/topics?withPartitions=yes' | jq .
+
+# get topic config + partitions
+curl 'http://localhost:19092/topics/main_topic?withPartitions=yes' | jq .
+
+# consume from a topic
+curl 'http://localhost:19092/topics/topic2/messages?group=1' | jq .
 ```
 
 ## Kafkacat
@@ -47,3 +58,5 @@ need a way to gracefully stop consumers to not leave a message half processed
 can reset consumer group offsets, set init offset for a new consumer group. Can only do this to non existing consumer groups,
 existing or "in use" consumer groups wont be affected by this command.
 noisy error logs when a message isn't ack'd immediately in pixy logs
+fetch_max_bytes used to tune how large of a message is able to be fetched by a consumer
+handling unsuccessful messages

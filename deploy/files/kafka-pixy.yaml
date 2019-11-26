@@ -112,7 +112,7 @@ proxies:
       #                random partition.
       #  * random:     all messages are published to a random partition.
       #  * roundrobin: iterate over partitions sequentially
-      partitioner: hash
+      partitioner: roundrobin
 
       # The timeout to specify on individual produce requests to the broker. The
       # broker will wait for replication to complete up to this duration before
@@ -173,7 +173,7 @@ proxies:
 
       # Period of time that Kafka-Pixy should keep a subscription for a
       # topic by a group in absence of requests to from the consumer group.
-      subscription_timeout: 15s
+      subscription_timeout: 5s
 
 # Configuration for securely accessing the gRPC and web servers
 tls:
