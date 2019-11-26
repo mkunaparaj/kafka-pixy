@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	pb "sandbox/kafka-pixy/clients/grpc"
 	"sandbox/kafka-pixy/clients/grpc/client"
@@ -10,7 +11,7 @@ import (
 const (
 	addr     string = "localhost:19091"
 	topic    string = "main_topic"
-	group    string = "consumer_group_5"
+	group    string = "3"
 	cluster  string = "default"
 	interval int    = 1 // in seconds
 )
@@ -19,12 +20,13 @@ func main() {
 
 	c := client.New(addr)
 
+	var count int
 	for {
 
 		input := &pb.ProdRq{
 			Cluster:  cluster,
 			Topic:    topic,
-			KeyValue: []byte("test_key"),
+			KeyValue: []byte(fmt.Sprintf("test_key_%d", count)),
 			Message:  []byte("test_msg"),
 		}
 
@@ -34,5 +36,7 @@ func main() {
 		}
 
 		log.Printf("produced msg: partition=%d offset=%d", rs.GetPartition(), rs.GetOffset())
+
+		count++
 	}
 }

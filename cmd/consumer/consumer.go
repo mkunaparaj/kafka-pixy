@@ -10,7 +10,7 @@ import (
 const (
 	addr    string = "localhost:19091"
 	topic   string = "main_topic"
-	group   string = "5"
+	group   string = "20"
 	cluster string = "default"
 )
 
