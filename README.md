@@ -2,7 +2,7 @@
 
 ## Usage
 
-expects helm + kubernetes running locally
+expects helm version 3.0 + kubernetes running locally
 
 ```bash
 make run
