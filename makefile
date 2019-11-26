@@ -10,7 +10,7 @@ ZK_HOSTS=10.96.1.2:2181
 .PHONY: clean ui run
 
 run:
-	kubectl apply -f deploy/ns.yaml
+	kubectl apply -f deploy/ns.yaml && kns sandbox
 	helm install $(HELM_DEPLOY_NAME) deploy
 
 ui:
