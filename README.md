@@ -2,6 +2,8 @@
 
 ## Build
 
+* go scripts expect that this repo is in `$GOPATH/sandbox/kafka-pixy`
+
 * will need to build jumpbox locally
 
 ```bash
