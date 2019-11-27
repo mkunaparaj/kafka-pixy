@@ -1,4 +1,4 @@
-module github.com/sendgrid/kafka-pixy-POC
+module github.com/sendgrid/kafka-pixy
 
 go 1.12
 

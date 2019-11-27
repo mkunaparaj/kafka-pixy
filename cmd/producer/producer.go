@@ -3,9 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
+	pb "github.com/sendgrid/kafka-pixy/clients/grpc"
+	"github.com/sendgrid/kafka-pixy/clients/grpc/client"
 	"log"
-	pb "github.com/sendgrid/kafka-pixy-POC/clients/grpc"
-	"github.com/sendgrid/kafka-pixy-POC/clients/grpc/client"
 )
 
 const (

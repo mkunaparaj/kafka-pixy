@@ -3,8 +3,8 @@ package main
 import (
 	"context"
 	"log"
-	pb "github.com/sendgrid/kafka-pixy-POC/clients/grpc"
-	"github.com/sendgrid/kafka-pixy-POC/clients/grpc/client"
+	pb "github.com/sendgrid/kafka-pixy/clients/grpc"
+	"github.com/sendgrid/kafka-pixy/clients/grpc/client"
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
