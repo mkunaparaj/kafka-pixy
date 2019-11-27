@@ -16,5 +16,5 @@ spec:
     spec:
       containers:
       - name: {{ .Values.jump.name }}
-        image: kafka-jump:latest
+        image: manasa_jump:latest
         imagePullPolicy: Never

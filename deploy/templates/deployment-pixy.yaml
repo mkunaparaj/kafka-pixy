@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
       - name: {{ .Values.pixy.name }}
-        image: kafka-pixy:latest
+        image: manasa_pixy:latest
         imagePullPolicy: Never
         command: ["/usr/bin/kafka-pixy"]
         args: ["-config", "{{ .Values.pixy.configDir }}/kafka-pixy.yaml", 

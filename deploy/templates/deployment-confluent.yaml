@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.confluent.name }}
+  labels:
+    app: {{ .Values.confluent.name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.confluent.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.confluent.name }}
+    spec:
+      containers:
+      - name: {{ .Values.confluent.name }}
+        image: confluentinc/cp-kafka-rest:5.3.1
+        env:
+        - name: KAFKA_REST_ZOOKEEPER_CONNECT
+          value: "{{ .Values.zk.service.clusterIP }}:{{ .Values.zk.service.port }}"
+        - name: KAFKA_REST_HOST_NAME
+          value: "{{ .Values.confluent.service.host }}:{{ .Values.confluent.service.port }}"

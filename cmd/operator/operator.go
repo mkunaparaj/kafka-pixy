@@ -3,8 +3,8 @@ package main
 import (
 	"context"
 	"log"
-	pb "sandbox/kafka-pixy/clients/grpc"
-	"sandbox/kafka-pixy/clients/grpc/client"
+	pb "github.com/sendgrid/kafka-pixy-POC/clients/grpc"
+	"github.com/sendgrid/kafka-pixy-POC/clients/grpc/client"
 )
 
 const (

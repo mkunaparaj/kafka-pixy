@@ -19,3 +19,9 @@ ui:
 
 jump:
   name: jump
+
+confluent:
+  name: confluent
+  service:
+    port: 2181
+    host: localhost

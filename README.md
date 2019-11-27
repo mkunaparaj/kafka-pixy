@@ -1,30 +1,8 @@
-# kafka-pixy
-
-## Build
-
-* go scripts expect that this repo is in `$GOPATH/sandbox/kafka-pixy`
-
-* will need to build jumpbox locally
-
-```bash
-cd build/jumpbox
-docker build . -t kafka-jump
-```
-
-* build kafka-pixy locally
-
-```bash
-cd build/kafka-pixy
-git clone git@github.com:mailgun/kafka-pixy.git
-cd kafka-pixy
-replace Dockerfile line 5 with: RUN CGO_ENABLED=0 go build -v -o /go/bin/kafka-pixy
-go mod vendor
-docker build . -t kafka-pixy
-```
+# kafka-pixy-POC
 
 ## Usage
 
-expects helm version 3.0 + kubernetes running locally
+expects helm + kubernetes running locally
 
 ```bash
 make run

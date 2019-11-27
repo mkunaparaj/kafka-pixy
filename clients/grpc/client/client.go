@@ -2,7 +2,7 @@ package client
 
 import (
 	"log"
-	pb "sandbox/kafka-pixy/clients/grpc"
+	pb "github.com/sendgrid/kafka-pixy-POC/clients/grpc"
 
 	"google.golang.org/grpc"
 )
